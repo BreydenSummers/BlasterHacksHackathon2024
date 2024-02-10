@@ -9,6 +9,10 @@ from units import Unit
 
 # Initialize Pygame
 pygame.init()
+pygame.mixer.init()
+
+pygame.mixer.music.load('amb.mp3')
+pygame.mixer.music.play(loops=-1)
 
 # Screen dimensions
 SCREEN_WIDTH = 800

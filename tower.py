@@ -1,4 +1,6 @@
 import pygame 
+import math
+from units import Unit
 
 class Tower :
 
@@ -15,9 +17,13 @@ class Tower :
         self.rot = rot
         self.mult = mult
         self.base = base
+        self.stat = stat
+        self.base_capture = 0
 
         self.rect = pygame.Rect(x,y,10,10)
 
+        self.xshift = 0
+        self.yshift = 0
 
         self.human_base = pygame.image.load(f'images/{self.base}.png').convert_alpha()
         self.width = self.human_base.get_width()
@@ -34,6 +40,7 @@ class Tower :
         
         self.human_base_main = pygame.transform.scale(self.human_base, (self.width * self.mult, self.height * self.mult))
         self.human_base_main = pygame.transform.rotate(self.human_base_main, self.rot)
+        self.human_base_main_active = self.human_base_main
         if not stat:
             color_shift = (120, 120, 120)
             color_surface = pygame.Surface((self.width * self.mult, self.height * self.mult))
@@ -52,7 +59,14 @@ class Tower :
 
     def render(self, screen, scroll_x, scroll_y):
         self.draw_health(screen, scroll_x, scroll_y)
-        screen.blit(self.human_base_main, (scroll_x + self.x, scroll_y + self.y))
+        if self.stat == False:
+            screen.blit(self.human_base_main, (scroll_x + self.x, scroll_y + self.y))
+        else:
+            screen.blit(self.human_base_main_active, (scroll_x + self.x, scroll_y + self.y))
+
+        self.xshift = scroll_x + self.x
+        self.yshift = scroll_y + self.y
+
 
     def take_damage(self):
         pass
@@ -60,5 +74,16 @@ class Tower :
     # def update(self, x_offset, y_offset):
 
     def update(self, objectList, moveDestintation):
-        
-        pass
+        for obj in objectList:
+            if isinstance(obj, Unit):
+                if self.stat == False:
+                    if self.base_capture < 100:
+                        if math.sqrt((obj.rect.x - self.xshift)**2 + (obj.rect.y - self.yshift)**2) <= 50:
+                            print(obj.rect.x)
+                            print(self.xshift)
+                            print(obj.rect.y)
+                            print(self.yshift)
+                            self.base_capture = 100
+                            self.stat = True
+
+                    
