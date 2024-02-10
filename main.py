@@ -1,7 +1,7 @@
 
 import pygame
 import sys
-from tower import tower
+from tower import Tower
 from map import map
 from units import Unit
 from UI import UI
@@ -28,12 +28,12 @@ scroll_y = 0
 
 objects = []
 # We need a better way to keep track of the buildings
-objects.append(tower(150, 300, 90, 2, stat=True))
-objects.append(tower(1500, 300, 270, .3, stat=True, base="fountain"))
-objects.append(tower(600, 150, mult=1, stat=False))
-objects.append(tower(600, 700, rot=180, mult=1, stat=False))
-objects.append(tower(1200, 130, 270, .15, stat=False, base="fountain"))
-objects.append(tower(1200, 700, 270, .15, stat=False, base="fountain"))
+objects.append(Tower(150, 300, 90, 2, stat=True))
+objects.append(Tower(1500, 300, 270, .3, stat=True, base="fountain"))
+objects.append(Tower(600, 150, mult=1, stat=False))
+objects.append(Tower(600, 700, rot=180, mult=1, stat=False))
+objects.append(Tower(1200, 130, 270, .15, stat=False, base="fountain"))
+objects.append(Tower(1200, 700, 270, .15, stat=False, base="fountain"))
 
 UI_table = UI(screen, scroll_x, scroll_y)
 game_map = map(scroll_x, scroll_y)
