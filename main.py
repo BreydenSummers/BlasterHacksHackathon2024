@@ -2,7 +2,9 @@
 import pygame
 import sys
 from tower import tower
+from map import map
 from units import Unit
+from UI import UIfrom units import Unit
 
 # Initialize Pygame
 pygame.init()
@@ -26,17 +28,29 @@ scroll_y = 0
 
 
 objects = []
-# objects.append(tower(20,20))
-objects.append(Unit(40,40,40,40,"red"))
+# We need a better way to keep track of the buildings
+objects.append(tower(150, 300, 90, 2, stat=True))
+objects.append(tower(1500, 300, 270, .3, stat=True, base="fountain"))
+objects.append(tower(600, 150, mult=1, stat=False))
+objects.append(tower(600, 700, rot=180, mult=1, stat=False))
+objects.append(tower(1200, 130, 270, .15, stat=False, base="fountain"))
+objects.append(tower(1200, 700, 270, .15, stat=False, base="fountain"))
+
+UI_table = UI(screen, scroll_x, scroll_y)
+game_map = map(scroll_x, scroll_y)
 
 def update(screen, objects):
     for object in objects:
         object.update(scroll_x,scroll_y)
 
-def render(screen, objects, dragging, selection_rect):
+def render(screen, objects):
+    game_map.render(screen, scroll_x, scroll_y)
+    
     for object in objects:
         object.render(screen, scroll_x, scroll_y)
-    
+
+    UI_table.render(screen, scroll_x, scroll_y)
+
 # Main game loop
 clock = pygame.time.Clock()
 running = True
@@ -55,13 +69,17 @@ while running:
     # Scroll screen
     keys = pygame.key.get_pressed()
     if keys[pygame.K_a]:
-        scroll_x += side_scroll_speed
+        if scroll_x < 0:
+            scroll_x += side_scroll_speed
     if keys[pygame.K_d]:
-        scroll_x -= side_scroll_speed
+        if scroll_x > game_map.width:
+            scroll_x -= side_scroll_speed
     if keys[pygame.K_w]:
-        scroll_y += vertical_scroll_speed
+        if scroll_y < 0:
+            scroll_y += vertical_scroll_speed
     if keys[pygame.K_s]:
-        scroll_y -= vertical_scroll_speed
+        if scroll_y > game_map.height:
+            scroll_y -= vertical_scroll_speed
 
 
     for event in pygame.event.get():
