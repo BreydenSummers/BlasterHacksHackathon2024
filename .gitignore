@@ -1,0 +1,11 @@
+# Visual Studio specific files
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Python specific files
+__pycache__/
+*.pyc
