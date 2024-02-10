@@ -4,7 +4,8 @@ import sys
 from tower import tower
 from map import map
 from units import Unit
-from UI import UIfrom units import Unit
+from UI import UI
+from units import Unit
 
 # Initialize Pygame
 pygame.init()
@@ -35,13 +36,14 @@ objects.append(tower(600, 150, mult=1, stat=False))
 objects.append(tower(600, 700, rot=180, mult=1, stat=False))
 objects.append(tower(1200, 130, 270, .15, stat=False, base="fountain"))
 objects.append(tower(1200, 700, 270, .15, stat=False, base="fountain"))
+objects.append(Unit(40,40,40,40,"BLUE"))
 
 UI_table = UI(screen, scroll_x, scroll_y)
 game_map = map(scroll_x, scroll_y)
 
-def update(screen, objects):
+def update(screen, objects, moveDestination):
     for object in objects:
-        object.update(scroll_x,scroll_y)
+        object.update(scroll_x,scroll_y, moveDestination)
 
 def render(screen, objects):
     game_map.render(screen, scroll_x, scroll_y)
@@ -81,6 +83,7 @@ while running:
         if scroll_y > game_map.height:
             scroll_y -= vertical_scroll_speed
 
+    moveDestination = None
 
     for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -101,6 +104,10 @@ while running:
                             selected_rects.append(sprite)
                     selection_rect.width = 0
                     selection_rect.height = 0
+                if event.button == 3:
+                    moveDestination = event.pos
+                    print("I should happen")
+
             elif event.type == pygame.MOUSEMOTION:
                 if dragging:
                     end_drag_pos = event.pos
@@ -117,8 +124,8 @@ while running:
     for y in range(0, SCREEN_HEIGHT, 50):
         pygame.draw.line(screen, (0, 0, 0), (0, y + scroll_y), (SCREEN_WIDTH, y + scroll_y))
 
-    update(screen, objects)
-    render(screen, objects, dragging, selection_rect)
+    update(screen, objects, moveDestination)
+    render(screen, objects)
     if dragging and selection_rect != None:
         pygame.draw.rect(screen, "BLUE", draw_rect, 1)
 

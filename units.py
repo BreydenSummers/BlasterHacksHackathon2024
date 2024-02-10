@@ -9,11 +9,15 @@ class Unit(pygame.sprite.Sprite):
         self.rect.topleft = (x,y)
         self.selected = False
 
-    def update(self, scroll_x, scroll_y):
+    def update(self, scroll_x, scroll_y, moveDestination=None):
         if self.selected:
             self.image.fill("red")
         else:
             self.image.fill("blue")
+
+        if moveDestination != None and self.selected:
+            self.rect.x = moveDestination[0]
+            self.rect.y = moveDestination[1]
 
     def render(self, screen, scroll_x, scroll_y):
         screen.blit(self.image, (scroll_x + self.rect.topleft[0], scroll_y + self.rect.topleft[1]))

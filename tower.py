@@ -16,6 +16,8 @@ class tower :
         self.mult = mult
         self.base = base
 
+        self.rect = pygame.Rect(x,y,10,10)
+
 
         self.human_base = pygame.image.load(f'images/{self.base}.png').convert_alpha()
         self.width = self.human_base.get_width()
@@ -55,6 +57,6 @@ class tower :
     def take_damage(self):
         pass
 
-    def update(self, x_offset, y_offset):
+    def update(self, x_offset, y_offset, moveDestintation):
         
         pass
