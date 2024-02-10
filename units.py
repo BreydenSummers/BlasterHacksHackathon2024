@@ -7,6 +7,7 @@ class Unit:
         self.width = width
         self.height = height
         self.color = color
+        
 
     def update(self):
         # You can implement any update logic here, such as movement or AI behavior
