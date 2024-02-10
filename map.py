@@ -4,6 +4,7 @@ class map:
 
     def __init__(self, x, y):
         self.center = 0
+        #This has negative numbers due to counting backwards
         self.width = -1240
         self.height = -420
 

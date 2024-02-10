@@ -26,7 +26,13 @@ scroll_y = 0
 
 
 objects = []
-objects.append(tower(20,20))
+# We need a better way to keep track of the buildings
+objects.append(tower(150, 300, 90, 2, stat=True))
+objects.append(tower(1500, 300, 270, .3, stat=True, base="fountain"))
+objects.append(tower(600, 150, mult=1, stat=False))
+objects.append(tower(600, 700, rot=180, mult=1, stat=False))
+objects.append(tower(1200, 130, 270, .15, stat=False, base="fountain"))
+objects.append(tower(1200, 700, 270, .15, stat=False, base="fountain"))
 game_map = map(scroll_x,scroll_y)
 
 def update(screen, objects):
