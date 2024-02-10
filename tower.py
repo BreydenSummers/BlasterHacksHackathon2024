@@ -1,13 +1,13 @@
 import pygame 
 
-class tower :
+class Tower :
 
     def __init__(self, x, y, rot=0, mult=1, stat=False, base="Base") :
         # sprite attributes
         # self.sprite
-        # self.health
+        self.health = 5
         # self.menu_description
-        # self.team   #human or forest...
+        self.team   #human or forest...
 
         # position attributes``
         self.x = x
@@ -25,7 +25,7 @@ class tower :
         self.hbar_x = (self.width/2)
         self.hbar_y = y-self.height/8
 
-        self.hbar_width = 50
+        self.hbar_width = self.health*10
         self.hbar_height = 15
         self.hbar_bordersize = 10
 
@@ -56,5 +56,4 @@ class tower :
         pass
 
     def update(self, x_offset, y_offset):
-        
         pass
