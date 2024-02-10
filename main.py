@@ -1,6 +1,7 @@
 
 import pygame
 import sys
+from tower import tower
 
 # Initialize Pygame
 pygame.init()
@@ -23,16 +24,23 @@ vertical_scroll_speed = 5
 scroll_y = 0
 
 
+objects = []
+objects.append(tower(20,20))
 
-def handleInput():
+def update(screen, objects):
+    for object in objects:
+        object.update(0,0)
 
+def render(screen, objects):
+    for object in objects:
+        object.render(screen)
 
 # Main game loop
 clock = pygame.time.Clock()
 running = True
 while running:
 
-    
+
     # Handle events
 
     for event in pygame.event.get():
@@ -59,6 +67,9 @@ while running:
         pygame.draw.line(screen, (0, 0, 0), (x + scroll_x, 0), (x + scroll_x, SCREEN_HEIGHT))
     for y in range(0, SCREEN_HEIGHT, 50):
         pygame.draw.line(screen, (0, 0, 0), (0, y + scroll_y), (SCREEN_WIDTH, y + scroll_y))
+
+    update(screen, objects)
+    render(screen, objects)
 
     # Update the display
     pygame.display.flip()
