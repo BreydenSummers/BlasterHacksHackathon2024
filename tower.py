@@ -7,7 +7,7 @@ class Tower :
         # self.sprite
         self.health = 5
         # self.menu_description
-        self.team   #human or forest...
+        # self.team   #human or forest...
 
         # position attributes``
         self.x = x
