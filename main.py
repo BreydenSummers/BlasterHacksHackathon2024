@@ -53,13 +53,17 @@ while running:
     # Scroll screen
     keys = pygame.key.get_pressed()
     if keys[pygame.K_a]:
-        scroll_x += side_scroll_speed
+        if scroll_x < 0:
+            scroll_x += side_scroll_speed
     if keys[pygame.K_d]:
-        scroll_x -= side_scroll_speed
+        if scroll_x > game_map.width:
+            scroll_x -= side_scroll_speed
     if keys[pygame.K_w]:
-        scroll_y += vertical_scroll_speed
+        if scroll_y < 0:
+            scroll_y += vertical_scroll_speed
     if keys[pygame.K_s]:
-        scroll_y -= vertical_scroll_speed
+        if scroll_y > game_map.height:
+            scroll_y -= vertical_scroll_speed
 
     # Clear the screen
     screen.fill(WHITE)

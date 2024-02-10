@@ -4,8 +4,8 @@ class map:
 
     def __init__(self, x, y):
         self.center = 0
-        self.width = 2048
-        self.height = 1024
+        self.width = -1240
+        self.height = -420
 
         self.layer = 0
         self.bg_map = pygame.image.load('images/lol.png').convert()
