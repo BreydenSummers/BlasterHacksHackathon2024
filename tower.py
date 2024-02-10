@@ -20,9 +20,9 @@ class tower :
     def draw_health(): 
         pass
 
-    def render(self, screen):
+    def render(self, screen, scroll_x, scroll_y):
         BLUE = (0, 0, 255)
-        pygame.draw.rect(screen, BLUE, (self.x, self.y, 300, 900))
+        pygame.draw.rect(screen, BLUE, (self.x + scroll_x, self.y + scroll_y, 300, 900))
 
     def update(self, x_offset, y_offset):
         # self.x += x_offset

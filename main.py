@@ -29,11 +29,11 @@ objects.append(tower(20,20))
 
 def update(screen, objects):
     for object in objects:
-        object.update(0,0)
+        object.update(scroll_x,scroll_y)
 
 def render(screen, objects):
     for object in objects:
-        object.render(screen)
+        object.render(screen, scroll_x, scroll_y)
 
 # Main game loop
 clock = pygame.time.Clock()
