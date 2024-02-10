@@ -2,6 +2,7 @@
 import pygame
 import sys
 from tower import tower
+from map import map
 
 # Initialize Pygame
 pygame.init()
@@ -26,12 +27,14 @@ scroll_y = 0
 
 objects = []
 objects.append(tower(20,20))
+game_map = map(scroll_x,scroll_y)
 
 def update(screen, objects):
     for object in objects:
         object.update(scroll_x,scroll_y)
 
 def render(screen, objects):
+    game_map.render(screen, scroll_x, scroll_y)
     for object in objects:
         object.render(screen, scroll_x, scroll_y)
 
