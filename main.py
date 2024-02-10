@@ -87,14 +87,13 @@ while running:
                 if dragging:
                     end_drag_pos = event.pos
                     selection_rect = pygame.Rect((start_drag_pos[0] - scroll_x, start_drag_pos[1] - scroll_y),
-                                                (end_drag_pos[0] - start_drag_pos[0] - scroll_x , end_drag_pos[1] - start_drag_pos[1] - scroll_y ))
+                                                (end_drag_pos[0] - start_drag_pos[0] + scroll_x , end_drag_pos[1] - start_drag_pos[1] + scroll_y ))
                     draw_rect = pygame.Rect(start_drag_pos, (end_drag_pos[0] - start_drag_pos[0], end_drag_pos[1] - start_drag_pos[1]))
 
     # Clear the screen
     screen.fill(WHITE)
 
     # Draw game elements (adjusted by scroll position)
-    # For demonstration, let's draw a grid
     for x in range(0, SCREEN_WIDTH, 50):
         pygame.draw.line(screen, (0, 0, 0), (x + scroll_x, 0), (x + scroll_x, SCREEN_HEIGHT))
     for y in range(0, SCREEN_HEIGHT, 50):
@@ -103,7 +102,7 @@ while running:
     update(screen, objects)
     render(screen, objects, dragging, selection_rect)
     if dragging and selection_rect != None:
-        pygame.draw.rect(screen, "BLUE", selection_rect, 1)
+        pygame.draw.rect(screen, "BLUE", draw_rect, 1)
 
     # Update the display
     pygame.display.flip()
